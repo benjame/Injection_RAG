@@ -1,8 +1,5 @@
 import os
 
-# os.environ["OPENAI_API_KEY"] = getpass.getpass()
-# os.environ["OPENAI_API_KEY"] = "OPENAI_API_KEY"
-
 from langchain_openai import ChatOpenAI
 
 from langchain_community.document_loaders import TextLoader
