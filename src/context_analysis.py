@@ -29,5 +29,21 @@ def summarize_context(loop_count):
     print(chain.invoke(current_loop_context_docs)["output_text"])
 
 
+def suggestion_generation(loop_count):
+    # Define prompt
+    prompt_template = """Suggest a possible injection method based on the following:
+    "{text}"
+    SUGGESTION:"""
 
+    prompt = PromptTemplate.from_template(prompt_template)
 
+    # Define LLM chain
+    llm = ChatOpenAI(temperature=0, model="gpt-4o")
+    llm_chain = LLMChain(llm=llm, prompt=prompt)
+
+    chain = load_summarize_chain(llm, chain_type="stuff")
+
+    # Load context documents
+    current_loop_context_docs = TextLoader(f"../session/sqlmap_out/loop_{loop_count}.txt").load()
+    
+    print(chain.invoke(current_loop_context_docs)["output_text"])

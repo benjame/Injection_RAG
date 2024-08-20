@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from re import S
 import subprocess
 import os
 import glob
@@ -78,6 +79,10 @@ def main():
         print("\n------------------------------------------")
         context_analysis.summarize_context(loop_count)
         print("\n------------------------------------------\n")
+        print("Injection Suggestions:")
+        context_analysis.suggestion_generation(loop_count)
+        print("\n------------------------------------------")
+
 
     # Delete all saved files upon exit
     for file in glob.glob(os.path.join(output_dir, "Loop_*.txt")):
