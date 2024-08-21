@@ -31,7 +31,6 @@ from langchain_core.runnables import RunnableLambda
 
 retriever = RunnableLambda(vectorstore.similarity_search).bind(k=1)  # select top 1 result
 
-# retriever.batch(["cat", "shark"])
 
 #Call the retriever with a query
 from langchain_core.prompts import ChatPromptTemplate
