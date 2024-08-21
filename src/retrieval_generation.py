@@ -51,9 +51,7 @@ rag_chain = {"context": retriever, "question": RunnablePassthrough()} | prompt |
 
 
 def ask_question(question: str):
-    response = rag_chain.invoke("tell me about cats")
+    response = rag_chain.invoke(question)
     print(response.content)
-
-
-
+    return response.content
 

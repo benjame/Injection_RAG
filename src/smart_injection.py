@@ -6,7 +6,7 @@ import glob
 import context_analysis
 
 def run_sqlmap(command):
-    # 启动 SQLMap 进程
+    # start a new SQLMap process
     process = subprocess.Popen(
         command,
         stdin=subprocess.PIPE,
@@ -15,19 +15,19 @@ def run_sqlmap(command):
         text=True
     )
 
-    # 读取 SQLMap 的输出
+    # Read the standard output and error
     stdout, stderr = process.communicate()
 
-    # 返回输出
+    # Return the output
     return stdout, stderr
 
 def main():
-    # 欢迎信息
+    # Print welcome message
     print("Welcome to the Smart Injection! -- An intelligent automatic SQL Injection and database takeover tool based on SQLMap and LLM technology.\n")
     print("This tool is designed to help you to automatically detect and exploit SQL injection vulnerabilities in web applications.\n")
     
 
-    # 打印 SQLMap 的基本用法
+    # Print the basic usage of SQLMap
     sqlmap_init_command = ['sqlmap', '--help']
     stdout, stderr = run_sqlmap(sqlmap_init_command)
     print("SQLMap Basic Usage:\n")
@@ -35,13 +35,13 @@ def main():
 
     loop_count = 0
 
-    # Specify the directory
+    # Specify the directory to save the output
     output_dir = "../session/sqlmap_out"
     os.makedirs(output_dir, exist_ok=True)
 
-    # 主循环
+    # Main loop
     while True:
-        # 读取用户输入
+        # Prompt the user to input SQLMap parameters or exit
         print("Please input SQLMap parameters to continue. You can input 'exit' to quit the program.\n")
         user_input = input("SQLMap parameters: ")
         
@@ -50,13 +50,13 @@ def main():
 
         loop_count += 1
 
-        # 构建 SQLMap 命令
+        # Construct the SQLMap command
         sqlmap_command = ['sqlmap'] + user_input.split()
 
-        # 运行 SQLMap
+        # Run SQLMap and get the output
         stdout, stderr = run_sqlmap(sqlmap_command)
 
-        # 打印输出
+        # Print the SQLMap output
         print("SQLMap Output:\n")
         print("------------------------------------------\n")
         print(stdout)
